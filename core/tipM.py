@@ -21,7 +21,8 @@ class TipM(QWidget, tipPY.Ui_Form):
 
     def load(self):
         tip = self.db.get_tip(self.friend)
-        self.Tip_mes_te.setPlainText(tip[0]["content"])
+        if tip:
+            self.Tip_mes_te.setPlainText(tip[0]["content"])
 
     def okClicked(self):
         self.db.add_tip(self.friend, self.Tip_mes_te.toPlainText().strip())

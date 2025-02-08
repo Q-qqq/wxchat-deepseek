@@ -48,6 +48,8 @@ class Main(QMainWindow, mainPY.Ui_MainWindow):
             if name not in items:
                 self.Friends_lw.addItem(name)
                 self.friends .append(name)
+                if not self.end_chat:
+                    self.wx.AddListenChat(who=name, savepic=True)
             else:
                 QMessageBox.information(self, "提示","昵称已存在")
         self.save()
@@ -56,6 +58,8 @@ class Main(QMainWindow, mainPY.Ui_MainWindow):
     def removeFriend(self):
         item = self.Friends_lw.currentItem()
         self.friends.remove(item.text())
+        if not self.end_chat:
+            self.wx.RemoveListenChat(item.text())
         self.Friends_lw.takeItem(self.Friends_lw.currentRow())
         self.save()
 
